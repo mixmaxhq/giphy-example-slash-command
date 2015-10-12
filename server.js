@@ -11,7 +11,7 @@ app.use(function(req, res, next) {
 
 // Since Mixmax calls this API directly from the client-side, it must be whitelisted.
 var corsOptions = {
-  origin: /[^.\s]+\.mixmax\.com/,
+  origin: /^[^.\s]+\.mixmax\.com$/,
   credentials: true
 };
 
