@@ -37,9 +37,10 @@ function handleIdString(id, req, res) {
 
   var image = response.body.data.images.original;
   var width = image.width > 600 ? 600 : image.width;
-  var html = '<p><img style="max-width:100%;" src="' + image.url + '" width="' + width + '"/></p>';
+  var html = '<img style="max-width:100%;" src="' + image.url + '" width="' + width + '"/>';
   res.json({
     body: html
+    // Add raw:true if you're returning content that you want the user to be able to edit
   });
 }
 
@@ -65,8 +66,9 @@ function handleSearchString(term, req, res) {
 
   // Cap at 600px wide
   var width = data.image_width > 600 ? 600 : data.image_width;
-  var html = '<p><img style="max-width:100%;" src="' + data.image_url + '" width="' + width + '"/></p>';
+  var html = '<img style="max-width:100%;" src="' + data.image_url + '" width="' + width + '"/>';
   res.json({
     body: html
+    // Add raw:true if you're returning content that you want the user to be able to edit
   });
 }
