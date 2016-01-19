@@ -1,8 +1,24 @@
-var key = require('../utils/key');
+var utils = require('../utils/utils')
+
 var sync = require('synchronize');
 var request = require('request');
 var _ = require('underscore');
 
+function nextPossibleColor(position) {
+  var possibleColors = ['0', '4', '8', 'b', 'f'];
+  if (position > 4) {
+    return possibleColors[0];
+  }
+  return possibleColors[position];
+}
+
+function fillWithPossibleColors(hexColor, position) {
+  var color = hexColor;
+  for (var i = hexColor.length; i < 7; i++) {
+    color += nextPossibleColor(position);
+  };
+  return color;
+}
 
 // The Type Ahead API.
 module.exports = function(req, res) {
@@ -15,47 +31,33 @@ module.exports = function(req, res) {
     return;
   }
 
-  var response;
-  try {
-    response = sync.await(request({
-      url: 'http://api.giphy.com/v1/gifs/search',
-      qs: {
-        q: term,
-        limit: 15,
-        api_key: key
-      },
-      gzip: true,
-      json: true,
-      timeout: 10 * 1000
-    }, sync.defer()));
-  } catch (e) {
-    res.status(500).send('Error');
-    return;
+  var color = term.toString();
+  var colors = [];
+  var isValidHex = /^#?([a-f]+)$/i.exec(color);
+  if (color.charAt(0) === '#' && color.length <= 7 && isValidHex) {
+
+
+    for (var position = 0; position < 5; position++) {
+      var hexColor = fillWithPossibleColors(color, position);
+      var rgbColor = utils.hexToRgb(hexColor);
+      var textColor = utils.matchingTextColor(hexColor);
+
+      var element = {
+        title: '<div style="width: 300px; height: 40px; background-color:' + hexColor + ' ; color:' + textColor + '">' +
+                hexColor + "<br>" +
+                'r:' + rgbColor.r + ' b:' + rgbColor.g + ' c:' + rgbColor.b + '</div>',
+        text: hexColor
+      }
+      colors.push(element)
+    };
   }
 
-  if (response.statusCode !== 200 || !response.body || !response.body.data) {
-    res.status(500).send('Error');
-    return;
-  }
-
-  var results = _.chain(response.body.data)
-    .reject(function(image) {
-      return !image || !image.images || !image.images.fixed_height_small;
-    })
-    .map(function(image) {
-      return {
-        title: '<img style="height:75px" src="' + image.images.fixed_height_small.url + '">',
-        text: 'http://giphy.com/' + image.id
-      };
-    })
-    .value();
-
-  if (results.length === 0) {
+  if (colors.length === 0) {
     res.json([{
       title: '<i>(no results)</i>',
       text: ''
     }]);
   } else {
-    res.json(results);
+    res.json(colors);
   }
 };
