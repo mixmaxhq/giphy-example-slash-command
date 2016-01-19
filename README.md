@@ -6,8 +6,8 @@ Using Mixmax `/color` command shows posibble colors and shows a box with hex/rgb
 - Input: valid hex color. In example "#fa"
 - Output:
 
-![http://i.imgur.com/uJgN1Vm.png]()
-![http://i.imgur.com/ytev2Jj.png]()
+![](http://i.imgur.com/uJgN1Vm.png)  
+![](http://i.imgur.com/ytev2Jj.png)  
 
 ## Running locally
 
