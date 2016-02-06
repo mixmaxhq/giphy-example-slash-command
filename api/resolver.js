@@ -9,11 +9,12 @@ module.exports = function(req, res) {
   var term = req.query.text.trim();
 
   if (/^http:\/\/giphy\.com\/\S+/.test(term)) {
-    // Special-case: handle strings in the special URL form that are suggested by the commandHint
+    // Special-case: handle strings in the special URL form that are suggested by the /typeahead
     // API. This is how the command hint menu suggests an exact Giphy image.
     handleIdString(term.replace(/^http:\/\/giphy\.com\//, ''), req, res);
   } else {
-    // Else, assume it was a search string.
+    // Else, if the user was typing fast and press enter before the /typeahead API can respond,
+    // Mixmax will just send the text to the /resolver API (for performance). Handle that here.
     handleSearchString(term, req, res);
   }
 };
