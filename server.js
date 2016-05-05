@@ -15,7 +15,6 @@ var corsOptions = {
   credentials: true
 };
 
-
 app.get('/typeahead', cors(corsOptions), require('./api/typeahead'));
 app.get('/resolver', cors(corsOptions), require('./api/resolver'));
 
