@@ -1,60 +1,59 @@
-var key = require('../utils/key');
-var sync = require('synchronize');
-var request = require('request');
-var _ = require('underscore');
+(function () {
+  'use strict';
 
-// The Type Ahead API.
-module.exports = function(req, res) {
-  var term = req.query.text.trim();
-  if (!term) {
-    res.json([{
-      title: '<i>(enter a search term)</i>',
-      text: ''
-    }]);
-    return;
+  var _ = require('underscore');
+  var tracks = require('../utils/tracks');
+
+  function isInvalidTrack(track) {
+    return !track ||
+      !track.id ||
+      !track.name ||
+      !track.artists ||
+      !track.artists.length ||
+      !track.artists[0].name;
   }
 
-  var response;
-  try {
-    response = sync.await(request({
-      url: 'http://api.giphy.com/v1/gifs/search',
-      qs: {
-        q: term,
-        limit: 15,
-        api_key: key
-      },
-      gzip: true,
-      json: true,
-      timeout: 10 * 1000
-    }, sync.defer()));
-  } catch (e) {
-    res.status(500).send('Error');
-    return;
+  function getTypeaheadForTrack(track) {
+    // TODO: Include 64x64 album cover img
+    return {
+      title: '<b>' + track.name + '</b><br/>' + track.artists[0].name,
+      text: track.id
+    };
   }
 
-  if (response.statusCode !== 200 || !response.body || !response.body.data) {
-    res.status(500).send('Error');
-    return;
-  }
+  // The Type Ahead API.
+  module.exports = function(req, res) {
+    var term = req.query.text.trim(),
+        songs;
 
-  var results = _.chain(response.body.data)
-    .reject(function(image) {
-      return !image || !image.images || !image.images.fixed_height_small;
-    })
-    .map(function(image) {
-      return {
-        title: '<img style="height:75px" src="' + image.images.fixed_height_small.url + '">',
-        text: 'http://giphy.com/' + image.id
-      };
-    })
-    .value();
+    if (!term) {
+      res.json([{
+        title: '<i>(enter a search term)</i>',
+        text: ''
+      }]);
+      return;
+    }
 
-  if (results.length === 0) {
-    res.json([{
-      title: '<i>(no results)</i>',
-      text: ''
-    }]);
-  } else {
-    res.json(results);
-  }
-};
+    try {
+      songs = tracks.get(term);
+    } catch (e) {
+      // TODO: gracefully handle errors
+      res.status(503).send('Error getting songs');
+      return;
+    }
+
+    var results = _.chain(songs)
+      .reject(isInvalidTrack)
+      .map(getTypeaheadForTrack)
+      .value();
+
+    if (results.length === 0) {
+      res.json([{
+        title: '<i>(no results)</i>',
+        text: ''
+      }]);
+    } else {
+      res.json(results);
+    }
+  };
+}());
