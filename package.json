@@ -4,7 +4,8 @@
   "description": "Spotify Song App for Mixmax",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "nodemon server.js",
+    "lint": "jshint **/*.js"
   },
   "repository": {
     "type": "git",
@@ -25,6 +26,7 @@
     "underscore": "^1.8.3"
   },
   "devDependencies": {
+    "jshint": "^2.9.2",
     "nodemon": "^1.7.1"
   }
 }
