@@ -1,6 +1,8 @@
 // Returns an array of Spotify track results for the query
 // Throws if request fails or returns invalid data
 (function () {
+  'use strict';
+
   var sync = require('synchronize'),
       request = require('request');
 
@@ -27,5 +29,5 @@
 
       return response.body.tracks.items;
     }
-  }
+  };
 }());
