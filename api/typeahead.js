@@ -38,7 +38,7 @@
       songs = tracks.get(term);
     } catch (e) {
       // TODO: gracefully handle errors
-      res.status(503).send('Error getting songs');
+      res.status(500).send('Error getting songs');
       return;
     }
 
