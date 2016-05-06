@@ -38,7 +38,7 @@
         return result;
       }
 
-      result += `<div style="display:inline-block;">`;
+      result += `<div style="display:inline-block;padding:10px;font-family:helvetica,sans-serif;">`;
       result += `<a href="https://embed.spotify.com/?uri=spotify:track:${track.id}" ` +
         `target="_blank" style="text-decoration:none;color:#444;">`;
       result += `<div style="display:flex;align-items:center;">`;
@@ -48,7 +48,7 @@
           .sortBy('width')
           .first()
           .value();
-          
+
         if (!!image) {
           result += `<img src="${image.url}" alt="Album cover" ` +
             `height="${image.height}" width="${image.width}" ` +
