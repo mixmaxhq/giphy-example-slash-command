@@ -28,6 +28,21 @@
       }
 
       return response.body.tracks.items;
+    },
+    getById: function(id) {
+      var response = sync.await(request({
+        url: 'https://api.spotify.com/v1/tracks/' + id,
+        gzip: true,
+        json: true,
+        timeout: 10 * 1000
+      }, sync.defer()));
+
+      if (response.statusCode !== 200 ||
+        !response.body) {
+        throw 'Error getting track by id';
+      }
+
+      return response.body;
     }
   };
 }());
