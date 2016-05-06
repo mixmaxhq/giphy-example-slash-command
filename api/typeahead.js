@@ -3,20 +3,17 @@
 
   var _ = require('underscore');
   var tracks = require('../utils/tracks');
+  var templates = require('../utils/templates');
 
   function isInvalidTrack(track) {
     return !track ||
       !track.id ||
-      !track.name ||
-      !track.artists ||
-      !track.artists.length ||
-      !track.artists[0].name;
+      !track.name;
   }
 
   function getTypeaheadForTrack(track) {
-    // TODO: Include 64x64 album cover img
     return {
-      title: '<b>' + track.name + '</b><br/>' + track.artists[0].name,
+      title: templates.getTrackSearchResultTemplate(track),
       text: track.id
     };
   }
@@ -28,7 +25,7 @@
 
     if (!term) {
       res.json([{
-        title: '<i>(enter a search term)</i>',
+        title: templates.getSearchPromptTemplate(),
         text: ''
       }]);
       return;
@@ -49,7 +46,7 @@
 
     if (results.length === 0) {
       res.json([{
-        title: '<i>(no results)</i>',
+        title: templates.getNoSearchResultsTemplate(),
         text: ''
       }]);
     } else {
