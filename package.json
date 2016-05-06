@@ -17,6 +17,10 @@
     "url": "https://github.com/ghaagsma/spotify-song-slash-command/issues"
   },
   "homepage": "https://github.com/ghaagsma/spotify-song-slash-command",
+  "engines": {
+    "node": "5.8.0",
+    "npm": "3.7.3"
+  },
   "dependencies": {
     "body-parser": "^1.12.2",
     "cors": "^2.7.1",
