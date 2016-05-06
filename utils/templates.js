@@ -49,7 +49,7 @@
             `background-color: #000;` +
           `}` +
           `.song-container:hover {` +
-            `opacity: 0.8;`
+            `opacity: 0.8;` +
           `}` +
         `</style>`;
 
