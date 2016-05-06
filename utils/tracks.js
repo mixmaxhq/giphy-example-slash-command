@@ -1,5 +1,3 @@
-// Returns an array of Spotify track results for the query
-// Throws if request fails or returns invalid data
 (function () {
   'use strict';
 
@@ -7,6 +5,8 @@
       request = require('request');
 
   module.exports = {
+    // Returns an array of Spotify track results for the query.
+    // Throws if request fails or returns invalid data.
     get: function(query, limit) {
       var response = sync.await(request({
         url: 'https://api.spotify.com/v1/search',
@@ -29,6 +29,8 @@
 
       return response.body.tracks.items;
     },
+    // Returns a Spotify track with the given id.
+    // Throws if request fails or returns invalid data.
     getById: function(id) {
       var response = sync.await(request({
         url: 'https://api.spotify.com/v1/tracks/' + id,
