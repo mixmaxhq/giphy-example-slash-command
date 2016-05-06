@@ -38,13 +38,24 @@
         return result;
       }
 
+      result +=
+        `<style>` +
+          `.song-container {` +
+            `display: inline-block;` +
+            `padding: 15px;` +
+            `font-family: helvetica,sans-serif;` +
+            `border: 1px solid #2ebd59;` +
+            `border-radius: 3px;` +
+            `background-color: #000;` +
+          `}` +
+          `.song-container:hover {` +
+            `opacity: 0.8;`
+          `}` +
+        `</style>`;
+
       result += `<a href="https://embed.spotify.com/?uri=spotify:track:${track.id}" ` +
         `target="_blank" style="text-decoration:none;color:#fff;">`;
-      result += `<div style="display:inline-block;padding:15px;` +
-        `font-family:helvetica,sans-serif;border-radius:3px;` +
-        `background-color:#000;border:1px solid #2ebd59;" ` +
-        `onmouseover="this.style.opacity='0.8';" ` +
-        `onmouseout="this.style.opacity='1'">`;
+      result += `<div class="song-container"`;
       result += `<div style="display:flex;align-items:center;">`;
 
       if (track.album && track.album.images && track.album.images.length) {
