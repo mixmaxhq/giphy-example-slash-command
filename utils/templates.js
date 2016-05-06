@@ -38,9 +38,13 @@
         return result;
       }
 
-      result += `<div style="display:inline-block;padding:15px;font-family:helvetica,sans-serif;border-radius:3px;background-color:#000;">`;
       result += `<a href="https://embed.spotify.com/?uri=spotify:track:${track.id}" ` +
         `target="_blank" style="text-decoration:none;color:#fff;">`;
+      result += `<div style="display:inline-block;padding:15px;` +
+        `font-family:helvetica,sans-serif;border-radius:3px;` +
+        `background-color:#000;border:1px solid #2ebd59;" ` +
+        `onmouseover="this.style.opacity='0.8';" ` +
+        `onmouseout="this.style.opacity='1'">`;
       result += `<div style="display:flex;align-items:center;">`;
 
       if (track.album && track.album.images && track.album.images.length) {
@@ -52,7 +56,7 @@
         if (!!image) {
           result += `<img src="${image.url}" alt="Album cover" ` +
             `height="${image.height}" width="${image.width}" ` +
-            `style="margin-right:10px;" />`;
+            `style="margin-right:15px;" />`;
         }
       }
 
@@ -63,7 +67,7 @@
         track.artists[0].name : '(unknown artist)';
       result += `<div style="font-size:12px;margin-top:10px;">${artistName}</div>`;
 
-      result += `</div></div></a></div>`;
+      result += `</div></div></div></a>`;
       return result;
     }
   };
