@@ -4,7 +4,7 @@
   "description": "Spotify Song App for Mixmax",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon server.js",
+    "start": "node server.js",
     "lint": "jshint **/*.js"
   },
   "repository": {
@@ -17,6 +17,10 @@
     "url": "https://github.com/ghaagsma/spotify-song-slash-command/issues"
   },
   "homepage": "https://github.com/ghaagsma/spotify-song-slash-command",
+  "engines": {
+    "node": "6.1.0",
+    "npm": "3.8.8"
+  },
   "dependencies": {
     "body-parser": "^1.12.2",
     "cors": "^2.7.1",
