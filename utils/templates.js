@@ -38,9 +38,9 @@
         return result;
       }
 
-      result += `<div style="display:inline-block;padding:10px;font-family:helvetica,sans-serif;">`;
+      result += `<div style="display:inline-block;padding:15px;font-family:helvetica,sans-serif;border-radius:3px;background-color:#000;">`;
       result += `<a href="https://embed.spotify.com/?uri=spotify:track:${track.id}" ` +
-        `target="_blank" style="text-decoration:none;color:#444;">`;
+        `target="_blank" style="text-decoration:none;color:#fff;">`;
       result += `<div style="display:flex;align-items:center;">`;
 
       if (track.album && track.album.images && track.album.images.length) {
