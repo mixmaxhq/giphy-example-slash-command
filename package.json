@@ -18,8 +18,8 @@
   },
   "homepage": "https://github.com/ghaagsma/spotify-song-slash-command",
   "engines": {
-    "node": "5.8.0",
-    "npm": "3.7.3"
+    "node": "6.1.0",
+    "npm": "3.8.8"
   },
   "dependencies": {
     "body-parser": "^1.12.2",
