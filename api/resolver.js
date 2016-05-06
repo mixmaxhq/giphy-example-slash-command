@@ -13,10 +13,6 @@
       res.status(400).send('Song id required');
     }
 
-    // If the user typed and pressed enter before the typeahead had
-    // a chance to suggest a song, the request for getting the track by id will
-    // fail, and this handler will handle the error.
-
     try {
       track = tracks.getById(term);
     } catch (e) {
