@@ -1,21 +1,22 @@
 {
-  "name": "giphy-mixmax-app",
+  "name": "spotify-song-mixmax-app",
   "version": "0.0.1",
-  "description": "Giphy App for Mixmax",
+  "description": "Spotify Song App for Mixmax",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "nodemon server.js",
+    "lint": "jshint **/*.js"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/mixmaxhq/giphy-mixmax-app.git"
+    "url": "https://github.com/ghaagsma/spotify-song-slash-command.git"
   },
-  "author": "Chanpory Rith <chanpory@mixmax.com> (https://mixmax.com/)",
+  "author": "Gerald Haagsma and Chanpory Rith <chanpory@mixmax.com> (https://mixmax.com/)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/mixmaxhq/giphy-mixmax-app/issues"
+    "url": "https://github.com/ghaagsma/spotify-song-slash-command/issues"
   },
-  "homepage": "https://github.com/mixmaxhq/giphy-mixmax-app",
+  "homepage": "https://github.com/ghaagsma/spotify-song-slash-command",
   "dependencies": {
     "body-parser": "^1.12.2",
     "cors": "^2.7.1",
@@ -25,6 +26,7 @@
     "underscore": "^1.8.3"
   },
   "devDependencies": {
+    "jshint": "^2.9.2",
     "nodemon": "^1.7.1"
   }
 }
