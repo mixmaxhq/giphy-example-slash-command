@@ -10,11 +10,16 @@ This is an open source Mixmax Slash Command. See <http://sdk.mixmax.com/docs/tut
 To simulate locally how Mixmax calls the typeahead URL (to return a JSON list of typeahead results), run:
 
 ```
-curl http://localhost:9145/typeahead?text=cats
+curl https://localhost:9145/typeahead?text=cats --insecure
 ```
 
 To simulate locally how Mixmax calls the resolver URL (to return HTML that goes into the email), run:
 
 ```
-curl http://localhost:9145/resolver?text=cats
+curl https://localhost:9145/resolver?text=cats --insecure
 ```
+
+
+## In production with https proxy
+
+Run `PROD=true npm start`

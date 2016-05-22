@@ -20,6 +20,7 @@
     "body-parser": "^1.12.2",
     "cors": "^2.7.1",
     "express": "^4.12.3",
+    "pem": "^1.8.3",
     "request": "^2.64.0",
     "synchronize": "^0.9.14",
     "underscore": "^1.8.3"
