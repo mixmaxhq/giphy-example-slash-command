@@ -19,7 +19,6 @@ To simulate locally how Mixmax calls the resolver URL (to return HTML that goes 
 curl https://localhost:9145/resolver?text=cats --insecure
 ```
 
+## Why do we run it in https locally?
 
-## In production with https proxy
-
-Run `PROD=true npm start`
+Mixmax slash command APIs are required to be served over https. This is because they are queried directly from the Mixmax client in the browser (using AJAX) that's running on an HTTPS domain. Browsers forbid AJAX requests from https domains to call http APIs, for security. So we must run an https server with a locally-signed certificate.
