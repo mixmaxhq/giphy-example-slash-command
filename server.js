@@ -18,6 +18,8 @@ if (process.env.NODE_ENV === 'production') {
   var pem = require('pem');
   var https = require('https');
   pem.createCertificate({ days: 1, selfSigned: true }, function(err, keys) {
+    if (err) throw err;
+
     https.createServer({
       key: keys.serviceKey,
       cert: keys.certificate
